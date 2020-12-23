@@ -18,9 +18,9 @@ var start, end;
 var w, h;
 var path = [];
 
-function Node(i, j){
-    this.i = i;
-    this.j = j;
+function Node(xi, yj){
+    this.i = xi;
+    this.j = yj;
     this.f = 0;
     this.g = 0;
     this.h = 0;
@@ -53,6 +53,18 @@ function Node(i, j){
         }
         if(this.j < rows - 1){
             this.neighbors.push(grid[this.i][this.j + 1]);
+        }
+        if(this.i > 0 && this.j > 0){
+            this.neighbors.push(grid[this.i - 1][this.j - 1]);
+        }
+        if(this.i > 0 && this.j < rows - 1){
+            this.neighbors.push(grid[this.i - 1][this.j + 1]);
+        }
+        if(this.i < cols - 1 && this.j > 0){
+            this.neighbors.push(grid[this.i + 1][this.j - 1]);
+        }
+        if(this.i < cols - 1 && this.j < rows - 1){
+            this.neighbors.push(grid[this.i + 1][this.j + 1]);
         }
     }
 }
