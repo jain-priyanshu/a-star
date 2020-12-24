@@ -1,99 +1,60 @@
-var cols = 50;
-var rows = 50;
-var grid = new Array(cols);
-var openSet = [];
-var closedSet = [];
-
-var start, end;
-
+var cols = 13;
+var rows = 11;
 var w, h;
-var path = [];
+var nodeArray = [];
+var graph = new Map();
+var edge = false;
 
 function setup(){
-    createCanvas(500, 500);
-    w = width / cols;
-    h = height / rows;
-    for(var i = 0; i < cols; i++){
-        grid[i] = new Array(rows);
-    }
-    for(var i = 0; i < cols; i++){
-        for(var j = 0; j < rows; j++){
-            grid[i][j] = new Node(i, j);
-        }
-    }
-
-    for(var i = 0; i < cols; i++){
-        for(var j = 0; j < rows; j++){
-            grid[i][j].addNeighbors(grid);
-        }
-    }
-    start = grid[0][0];
-    end = grid[cols - 1][rows - 1];
-    end.wall = false;
-    start.wall = false;
-    openSet.push(start);
-
+    createCanvas(700, 550);
 }
 
 function draw(){
-    if(openSet.length > 0){
-        var winner = 0;
-        for(var i = 0; i < openSet.length; i++){
-            if(openSet[i].f < openSet[winner].f){
-                winner = i;
-            }
-        }
-        var current = openSet[winner];
-        if(current === end){
-            noLoop();
-            console.log("end");
-        }
-        removeFromArray(openSet, current);
-        closedSet.push(current);
-        var neighbors = current.neighbors;
-        for(var i = 0; i < neighbors.length; i++){
-            var neighbor = neighbors[i];
-            if(!closedSet.includes(neighbor) && !neighbor.wall){
-                var newPath = false;
-                var tempG = current.g + 1;
-                if(openSet.includes(neighbor)){
-                    if(tempG < neighbor.g){
-                        neighbor.g = tempG;
-                        newPath = true;
-                    }
-                }
-                else{
-                    newPath = true;
-                    neighbor.g = tempG;
-                    openSet.push(neighbor);
-                }
-                if(newPath){
-                    neighbor.h = heuristic(neighbor, end);
-                    neighbor.f = neighbor.g + neighbor.h;
-                    neighbor.previous = current;
-                }
-            }
+    w = width / cols;
+    h = height / rows;
+    background(255);
+    for(var i = 1; i < cols; i++){
+        line(i * w, 0, i * w, height);
+    }
+    for(var i = 1; i < rows; i++){
+        line(0, i * h, width, i * h);
+    }
+    showNodes(nodeArray);
+    if(nodeArray[0]){
+        nodeArray[0].show([255, 0, 0]);
 
-        }
+    }
+}
 
+var statChar = 'A'
+function mouseClicked(){
+    if(!edge){
+        createNode(statChar, mouseX, mouseY);
+        statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
     }
     else{
-        console.log("No Solution");
-        noLoop();
-        return;
+        var temp = mouseOnNode();
+        if(temp){
+            console.log("EDGE!");
+        }
+        else{
+            console.log("False Alarm");
+        }
     }
-    background(0);
-    showNodes(grid, 255, 2);
-    showNodes(closedSet, [255, 0, 0], 1);
-    showNodes(openSet, [0, 255, 0], 1);
+}
 
-    path = [];
-    var temp = current;
-    path.push(temp);
-    while(temp.previous){
-        
-        path.push(temp.previous);
-        temp = temp.previous;
+function mousePressed(){
+    var temp = mouseOnNode();
+    if(temp){
+        edge = true;
     }
-    showNodes(path, [0, 0, 255], 1);
+    else{
+        edge = false;
+    }
+}
+
+function mouseDragged(){
+    if(edge){
+
+    }
 }
