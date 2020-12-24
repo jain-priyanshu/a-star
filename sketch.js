@@ -33,14 +33,7 @@ function draw(){
 var statChar = 'A'
 function mouseClicked(){
     ok = false;
-    if(!edge){
-        var temp = mouseOnNode();
-        if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp){
-            createNode(statChar, mouseX, mouseY);
-            statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
-        }
-    }
-    else{
+    if(edge){
         var temp = mouseOnNode();
         if(temp && temp != edge && !graph.get(temp).includes(edge)){
             addEdge(temp, edge);
@@ -54,19 +47,30 @@ function mouseClicked(){
             console.log("False Alarm");
         }
     }
+    else{
+        edge = null;
+    }
 }
 
 var intX, intY;
 function mousePressed(){
     var temp = mouseOnNode();
-    if(temp){
-        intX = mouseX;
-        intY = mouseY;
-        edge = temp;
+    if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp){
+        edge = null;
+        createNode(statChar, mouseX, mouseY);
+        statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
     }
     else{
-        edge = null;
+        if(temp){
+            intX = mouseX;
+            intY = mouseY;
+            edge = temp;
+        }
+        else{
+            edge = null;
+        }
     }
+    var temp = mouseOnNode();
 }
 
 var ok = false;
