@@ -17,7 +17,7 @@ function manhattan(){
 }
 
 // Node Functions
-function showNodes(nodeArray){
+function showNodes(){
     for(var i = 0; i < nodeArray.length; i++){
         nodeArray[i].show(255);
     }
@@ -54,5 +54,16 @@ function interact(x, y, node){
     }
     else{
         return false;
+    }
+}
+
+function showLines(){
+    line(intX, intY, mouseX, mouseY);
+}
+
+function showEdges(){
+    for(var i = 0; i < edgeLines.length; i++){
+        var temp = edgeLines[i]
+        line(temp[0], temp[1], temp[2], temp[3]);
     }
 }

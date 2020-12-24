@@ -14,9 +14,4 @@ function Node(nodeName, x, y){
         fill(0);
         text(this.nodeName, this.x, this.y);
     }
-
-    this.showEdges = function(end){
-        
-    }
-
 }
