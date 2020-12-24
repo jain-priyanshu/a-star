@@ -29,6 +29,27 @@ function createNode(nodeName, x, y){
     addVertex(newNode);
 }
 
+function deleteNode(node){
+    removeFromArray(nodeArray, node);
+    for(var i = 0; i < edgeLines.length; i++){
+        if(edgeLines[i].includes(node.x)){
+            removeFromArray(edgeLines, edgeLines[i]);
+            break;
+        }
+    }
+    if(i != edgeLines.length){
+        deleteNode(node); // deleting element changes arr size, calling recursively to adjust
+    }
+    else{
+        var neighbors = graph.get(node); // neighbors of delete(node)
+        for(var i = 0; i < neighbors.length; i++){
+            var temp = graph.get(neighbors[i]); //deleting node from each neighbors[] of neighbors
+            removeFromArray(temp, node);
+        }
+        graph.delete(node);
+    }
+}
+
 //Adj List Functions
 function addVertex(node){
     graph.set(node, []);
@@ -67,3 +88,4 @@ function showEdges(){
         line(temp[0], temp[1], temp[2], temp[3]);
     }
 }
+

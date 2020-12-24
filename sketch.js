@@ -28,15 +28,25 @@ function draw(){
     if(nodeArray[0]){
         nodeArray[0].show([255, 0, 0]);
     }
+
+    if(mouseIsPressed){
+        if(mouseButton === RIGHT){
+            var temp = mouseOnNode();
+            if(temp){
+                deleteNode(temp);
+            }
+        }
+    }
 }
 
 var statChar = 'A'
-function mouseClicked(){
-    ok = false;
-    if(edge){
+function mouseClicked(){ // mouse release
+    ok = false; // line animation stops
+    if(edge){ // making a new edge in progress
         var temp = mouseOnNode();
+        //if the edge is not duplicate, no self-looping, and mouse is over another edge
         if(temp && temp != edge && !graph.get(temp).includes(edge)){
-            addEdge(temp, edge);
+            addEdge(temp, edge); // adds new edge
             edgeLines.push([temp.x, temp.y, edge.x, edge.y]);
             console.log(graph);
             console.log("EDGE!");
@@ -53,15 +63,18 @@ function mouseClicked(){
 }
 
 var intX, intY;
-function mousePressed(){
-    var temp = mouseOnNode();
-    if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp){
+function mousePressed(){ // mouse clicked
+    if(mouseButton === LEFT){ // create node only for left click
+        var temp = mouseOnNode();
+    }
+    //creating node inside canvas, when used left click and no nodes are overlapping
+    if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp && mouseButton === LEFT){
         edge = null;
         createNode(statChar, mouseX, mouseY);
         statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
     }
     else{
-        if(temp){
+        if(temp){ // Mouse is over a node, allowing to create an edge
             intX = mouseX;
             intY = mouseY;
             edge = temp;
@@ -76,7 +89,7 @@ function mousePressed(){
 var ok = false;
 function mouseDragged(){
     if(edge){
-        ok = true;
+        ok = true; // line animation started
     }
     else{
         ok = false;
