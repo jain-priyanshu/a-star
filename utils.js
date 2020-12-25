@@ -1,3 +1,12 @@
+function showGrid(){
+    for(var i = 1; i < cols; i++){
+        line(i * w, 0, i * w, height);
+    }
+    for(var i = 1; i < rows; i++){
+        line(0, i * h, width, i * h);
+    }
+}
+
 function removeFromArray(arr, elt){
     for(var i = arr.length - 1; i >= 0; i--){
         if(arr[i] == elt){
@@ -32,7 +41,8 @@ function createNode(nodeName, x, y){
 function deleteNode(node){
     removeFromArray(nodeArray, node);
     for(var i = 0; i < edgeLines.length; i++){
-        if(edgeLines[i].includes(node.x)){
+        //checking if the node have edges or not
+        if(edgeLines[i].includes(node.x) && edgeLines[i].includes(node.y)){
             removeFromArray(edgeLines, edgeLines[i]);
             break;
         }
@@ -70,7 +80,7 @@ function mouseOnNode(){
 }
 
 function interact(x, y, node){
-    if(abs(x - node.x) <= 25 && abs(y - node.y) <=25){
+    if(abs(x - node.x) <= 27 && abs(y - node.y) <=27){
         return true;
     }
     else{
@@ -85,7 +95,15 @@ function showLines(){
 function showEdges(){
     for(var i = 0; i < edgeLines.length; i++){
         var temp = edgeLines[i]
+        stroke(255, 0, 0);
         line(temp[0], temp[1], temp[2], temp[3]);
+        stroke(0);
     }
+}
+
+function closestIntersection(x, y){
+    var xw = round(x / w) * w; // closest x value on grid from mouseX
+    var yh = round(y / h) * h; // closest y value on grid from mouseY
+    return [xw, yh];
 }
 

@@ -17,12 +17,7 @@ function draw(){
     if(ok){
         showLines();
     }
-    for(var i = 1; i < cols; i++){
-        line(i * w, 0, i * w, height);
-    }
-    for(var i = 1; i < rows; i++){
-        line(0, i * h, width, i * h);
-    }
+    showGrid();
     showEdges();
     showNodes();
     if(nodeArray[0]){
@@ -70,7 +65,9 @@ function mousePressed(){ // mouse clicked
     //creating node inside canvas, when used left click and no nodes are overlapping
     if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp && mouseButton === LEFT){
         edge = null;
-        createNode(statChar, mouseX, mouseY);
+        // auto adjusting node's x,y towards closest grid intersection
+        var coordinates = closestIntersection(mouseX, mouseY);
+        createNode(statChar, coordinates[0], coordinates[1]);
         statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
     }
     else{
