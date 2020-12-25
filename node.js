@@ -9,7 +9,7 @@ function Node(nodeName, x, y){
 
     this.show = function(col){
         fill(col);
-        ellipse(this.x , this.y, 50, 50);
+        ellipse(this.x , this.y, 35, 35);
         textAlign(CENTER, CENTER);
         fill(0);
         text(this.nodeName, this.x, this.y);

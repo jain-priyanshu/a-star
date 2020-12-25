@@ -1,9 +1,9 @@
 function showGrid(){
     for(var i = 1; i < cols; i++){
-        line(i * w, 0, i * w, height);
+        line(i*w, h, i*w, height - h)
     }
     for(var i = 1; i < rows; i++){
-        line(0, i * h, width, i * h);
+        line(w, i * h, width - w, i * h);
     }
 }
 
@@ -106,4 +106,3 @@ function closestIntersection(x, y){
     var yh = round(y / h) * h; // closest y value on grid from mouseY
     return [xw, yh];
 }
-

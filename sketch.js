@@ -1,5 +1,5 @@
-var cols = 13;
-var rows = 11;
+var cols = 21;
+var rows = 13;
 var w, h;
 var nodeArray = [];
 var graph = new Map();
@@ -7,7 +7,7 @@ var edgeOk = null;
 var edges = [];
 
 function setup(){
-    createCanvas(700, 550);
+    createCanvas(810, 637);
 }
 
 function draw(){
@@ -63,7 +63,7 @@ function mousePressed(){ // mouse clicked
         var temp = mouseOnNode();
     }
     //creating node inside canvas, when used left click and no nodes are overlapping
-    if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp && mouseButton === LEFT){
+    if(mouseX >= w/2 && mouseX <= width - (w/2) && mouseY >= h/2 && mouseY <= height - (h/2) && !temp && mouseButton === LEFT){
         edgeOk = null;
         // auto adjusting node's x,y towards closest grid intersection
         var coordinates = closestIntersection(mouseX, mouseY);
