@@ -3,8 +3,8 @@ var rows = 11;
 var w, h;
 var nodeArray = [];
 var graph = new Map();
-var edge = null;
-var edgeLines = [];
+var edgeOk = null;
+var edges = [];
 
 function setup(){
     createCanvas(700, 550);
@@ -37,23 +37,23 @@ function draw(){
 var statChar = 'A'
 function mouseClicked(){ // mouse release
     ok = false; // line animation stops
-    if(edge){ // making a new edge in progress
+    if(edgeOk){ // making a new edge in progress
         var temp = mouseOnNode();
         //if the edge is not duplicate, no self-looping, and mouse is over another edge
-        if(temp && temp != edge && !graph.get(temp).includes(edge)){
-            addEdge(temp, edge); // adds new edge
-            edgeLines.push([temp.x, temp.y, edge.x, edge.y]);
+        if(temp && temp != edgeOk && !graph.get(temp).includes(edgeOk)){
+            addEdge(temp, edgeOk); // adds new edge
+            edges.push([edgeOk, temp]);
             console.log(graph);
             console.log("EDGE!");
-            edge = null;
+            edgeOk = null;
         }
         else{
-            edge = null;
+            edgeOk = null;
             console.log("False Alarm");
         }
     }
     else{
-        edge = null;
+        edgeOk = null;
     }
 }
 
@@ -64,7 +64,7 @@ function mousePressed(){ // mouse clicked
     }
     //creating node inside canvas, when used left click and no nodes are overlapping
     if(mouseX >=0 && mouseX <= width && mouseY >= 0 && mouseY <= height && !temp && mouseButton === LEFT){
-        edge = null;
+        edgeOk = null;
         // auto adjusting node's x,y towards closest grid intersection
         var coordinates = closestIntersection(mouseX, mouseY);
         createNode(statChar, coordinates[0], coordinates[1]);
@@ -74,10 +74,10 @@ function mousePressed(){ // mouse clicked
         if(temp){ // Mouse is over a node, allowing to create an edge
             intX = mouseX;
             intY = mouseY;
-            edge = temp;
+            edgeOk = temp;
         }
         else{
-            edge = null;
+            edgeOk = null;
         }
     }
     var temp = mouseOnNode();
@@ -85,7 +85,7 @@ function mousePressed(){ // mouse clicked
 
 var ok = false;
 function mouseDragged(){
-    if(edge){
+    if(edgeOk){
         ok = true; // line animation started
     }
     else{

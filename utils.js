@@ -40,14 +40,14 @@ function createNode(nodeName, x, y){
 
 function deleteNode(node){
     removeFromArray(nodeArray, node);
-    for(var i = 0; i < edgeLines.length; i++){
+    for(var i = 0; i < edges.length; i++){
         //checking if the node have edges or not
-        if(edgeLines[i].includes(node.x) && edgeLines[i].includes(node.y)){
-            removeFromArray(edgeLines, edgeLines[i]);
+        if(edges[i].includes(node)){
+            removeFromArray(edges, edges[i]);
             break;
         }
     }
-    if(i != edgeLines.length){
+    if(i != edges.length){
         deleteNode(node); // deleting element changes arr size, calling recursively to adjust
     }
     else{
@@ -93,10 +93,10 @@ function showLines(){
 }
 
 function showEdges(){
-    for(var i = 0; i < edgeLines.length; i++){
-        var temp = edgeLines[i]
+    for(var i = 0; i < edges.length; i++){
+        var temp = edges[i]
         stroke(255, 0, 0);
-        line(temp[0], temp[1], temp[2], temp[3]);
+        line(temp[0].x, temp[0].y, temp[1].x, temp[1].y);
         stroke(0);
     }
 }
