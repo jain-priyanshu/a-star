@@ -5,9 +5,15 @@ var nodeArray = [];
 var graph = new Map();
 var edgeOk = null;
 var edges = [];
+var start, end;
+var button;
+var openSet = [];
+var closedSet = [];
+var path = [];
 
 function setup(){
-    createCanvas(810, 637);
+    createCanvas(900, 557);
+    button = createButton('A*');
 }
 
 function draw(){
@@ -19,11 +25,10 @@ function draw(){
     }
     showGrid();
     showEdges();
-    showNodes();
-    if(nodeArray[0]){
-        nodeArray[0].show([255, 0, 0]);
-    }
-
+    showNodes(nodeArray, 255);
+    showNodes(openSet, [0, 255, 0]);
+    showNodes(closedSet, [255, 0, 0]);
+    showNodes(path, [0, 0, 255]);
     if(mouseIsPressed){
         if(mouseButton === RIGHT){
             var temp = mouseOnNode();
@@ -32,6 +37,7 @@ function draw(){
             }
         }
     }
+    button.mousePressed(aStar);
 }
 
 var statChar = 'A'

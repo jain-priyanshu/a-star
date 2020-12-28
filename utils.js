@@ -17,18 +17,19 @@ function removeFromArray(arr, elt){
 
 // Heuristics
 function euclidian(start, end){
-    var h = dist(start.i, start.j, end.i, end.j);
+    var h = dist(start.x, start.y, end.x, end.y);
     return h;
 }
 
-function manhattan(){
-
+function manhattan(a, b){
+    var dist = abs(a.x - b.x) + abs(a.y - b.y);
+    return dist;
 }
 
 // Node Functions
-function showNodes(){
-    for(var i = 0; i < nodeArray.length; i++){
-        nodeArray[i].show(255);
+function showNodes(arr, col){
+    for(var i = 0; i < arr.length; i++){
+        arr[i].show(col);
     }
 }
 
@@ -96,7 +97,9 @@ function showEdges(){
     for(var i = 0; i < edges.length; i++){
         var temp = edges[i]
         stroke(255, 0, 0);
+        strokeWeight(3);
         line(temp[0].x, temp[0].y, temp[1].x, temp[1].y);
+        strokeWeight(1);
         stroke(0);
     }
 }
