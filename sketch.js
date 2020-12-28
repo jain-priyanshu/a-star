@@ -5,6 +5,7 @@ var nodeArray = [];
 var graph = new Map();
 var edgeOk = null;
 var edges = [];
+var gMap = new Map();
 var start, end;
 var button;
 var openSet = [];
@@ -49,7 +50,8 @@ function mouseClicked(){ // mouse release
         if(temp && temp != edgeOk && !graph.get(temp).includes(edgeOk)){
             addEdge(temp, edgeOk); // adds new edge
             edges.push([edgeOk, temp]);
-            console.log(graph);
+            var rand = round(random(100));
+            gMap.set(edges[edges.length - 1], rand);
             console.log("EDGE!");
             edgeOk = null;
         }

@@ -24,10 +24,16 @@ function aStar(){
 
             var neighbors = graph.get(current);
             for (var i = 0; i < neighbors.length; i++) {
+                console.log("Hey");
                 var neighbor = neighbors[i];
                 if (!closedSet.includes(neighbor)) {
                     var newPath = false;
-                    var tempG = current.g + euclidian(current, neighbor);
+                    for(var j = 0; j < edges.length; j++){
+                        if(edges[j].includes(current) && edges[j].includes(neighbor)){
+                            var tempG = current.g + gMap.get(edges[j]);
+                        }
+                    }
+
                     if (openSet.includes(neighbor)) {
                         if (tempG < neighbor.g) {
                             newPath = true;
@@ -40,7 +46,7 @@ function aStar(){
                         openSet.push(neighbor);
                     }
                     if (newPath) {
-                        neighbor.h = euclidian(neighbor, end);
+                        neighbor.h = 0;
                         neighbor.f = neighbor.h + neighbor.g;
                         neighbor.previous = current;
                     }

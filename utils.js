@@ -40,6 +40,9 @@ function createNode(nodeName, x, y){
 }
 
 function deleteNode(node){
+    removeFromArray(openSet, node);
+    removeFromArray(closedSet, node);
+    removeFromArray(path, node);
     removeFromArray(nodeArray, node);
     for(var i = 0; i < edges.length; i++){
         //checking if the node have edges or not
@@ -95,7 +98,22 @@ function showLines(){
 
 function showEdges(){
     for(var i = 0; i < edges.length; i++){
-        var temp = edges[i]
+        var temp = edges[i];
+        var slope = (temp[1].x - temp[0].x) / (temp[1].y - temp[0].y);
+        var dispG = gMap.get(temp);
+        if(slope > 0){
+            if(slope == Infinity){
+                textAlign(RIGHT, BOTTOM);
+            }
+            else{
+                textAlign(RIGHT, TOP);
+            }
+        }
+        else{
+            textAlign(RIGHT, BOTTOM);
+        }
+        fill(0);
+        text(dispG, (temp[0].x + temp[1].x)/2, (temp[0].y + temp[1].y)/2);
         stroke(255, 0, 0);
         strokeWeight(3);
         line(temp[0].x, temp[0].y, temp[1].x, temp[1].y);
