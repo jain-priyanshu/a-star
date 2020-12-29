@@ -144,3 +144,12 @@ function startEndInput(){
     temp.style.display = "block";
     temp.addEventListener('submit', aStar);
 }
+
+function resetValues(){
+    for(var i = 0; i < nodeArray.length; i++){
+        nodeArray[i].g = 0;
+        nodeArray[i].f = 0;
+        nodeArray[i].h = 0;
+        nodeArray[i].previous = undefined;
+    }
+}

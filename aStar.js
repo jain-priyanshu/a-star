@@ -1,6 +1,7 @@
 var aStar = function(event){
     event.preventDefault();
     showNodes(nodeArray, 255);
+    resetValues();
     var temp = document.getElementById('start-end');
     temp.style.display = "none";
     var tempStart = document.getElementById('start');
@@ -79,6 +80,7 @@ var aStar = function(event){
         var temp = current;
         path.push(temp);
         while (temp.previous) {
+            console.log("Hey");
             path.push(temp.previous);
             temp = temp.previous;
         }
