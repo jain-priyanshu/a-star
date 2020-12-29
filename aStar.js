@@ -24,7 +24,6 @@ function aStar(){
 
             var neighbors = graph.get(current);
             for (var i = 0; i < neighbors.length; i++) {
-                console.log("Hey");
                 var neighbor = neighbors[i];
                 if (!closedSet.includes(neighbor)) {
                     var newPath = false;

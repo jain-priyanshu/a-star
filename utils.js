@@ -127,3 +127,14 @@ function closestIntersection(x, y){
     var yh = round(y / h) * h; // closest y value on grid from mouseY
     return [xw, yh];
 }
+
+var input;
+function gInput(edge){
+    input = parseInt(prompt("Enter G value: "), 10);
+    if(isNaN(input)){
+        gInput(edge);
+    }
+    else{
+        gMap.set(edge, input);
+    }
+}

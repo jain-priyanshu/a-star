@@ -30,6 +30,7 @@ function draw(){
     showNodes(openSet, [0, 255, 0]);
     showNodes(closedSet, [255, 0, 0]);
     showNodes(path, [0, 0, 255]);
+
     if(mouseIsPressed){
         if(mouseButton === RIGHT){
             var temp = mouseOnNode();
@@ -50,8 +51,7 @@ function mouseClicked(){ // mouse release
         if(temp && temp != edgeOk && !graph.get(temp).includes(edgeOk)){
             addEdge(temp, edgeOk); // adds new edge
             edges.push([edgeOk, temp]);
-            var rand = round(random(100));
-            gMap.set(edges[edges.length - 1], rand);
+            gInput(edges[edges.length - 1]);
             console.log("EDGE!");
             edgeOk = null;
         }
