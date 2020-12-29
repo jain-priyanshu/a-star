@@ -8,6 +8,8 @@ var aStar = function(event){
     openSet = [];
     closedSet = [];
     path = [];
+    start = null;
+    end = null;
     for(var i = 0; i < nodeArray.length; i++){
         if(nodeArray[i].nodeName == tempStart.value.toUpperCase()){
             start = nodeArray[i];
@@ -15,6 +17,10 @@ var aStar = function(event){
         if(nodeArray[i].nodeName == tempEnd.value.toUpperCase()){
             end = nodeArray[i];
         }
+    }
+    if(!start || !end){
+        startEndInput();
+        return;
     }
     var done = false;
     openSet.push(start);
@@ -57,7 +63,7 @@ var aStar = function(event){
                         openSet.push(neighbor);
                     }
                     if (newPath) {
-                        neighbor.h = 0;
+                        neighbor.h = manhattan(neighbor, end);
                         neighbor.f = neighbor.h + neighbor.g;
                         neighbor.previous = current;
                     }

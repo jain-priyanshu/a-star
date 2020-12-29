@@ -22,7 +22,7 @@ function euclidian(start, end){
 }
 
 function manhattan(a, b){
-    var dist = abs(a.x - b.x) + abs(a.y - b.y);
+    var dist = (round(abs(a.x - b.x) / w) + round(abs(a.y - b.y) / h)) * 10;
     return dist;
 }
 
