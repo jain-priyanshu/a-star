@@ -138,3 +138,9 @@ function gInput(edge){
         gMap.set(edge, input);
     }
 }
+
+function startEndInput(){
+    var temp = document.getElementById('start-end');
+    temp.style.display = "block";
+    temp.addEventListener('submit', aStar);
+}

@@ -13,6 +13,8 @@ var closedSet = [];
 var path = [];
 
 function setup(){
+    var temp = document.getElementById('start-end');
+    temp.style.display = "none";
     createCanvas(900, 557);
     button = createButton('A*');
 }
@@ -39,7 +41,7 @@ function draw(){
             }
         }
     }
-    button.mousePressed(aStar);
+    button.mousePressed(startEndInput);
 }
 
 var statChar = 'A'

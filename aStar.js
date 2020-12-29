@@ -1,9 +1,21 @@
-function aStar(){
+var aStar = function(event){
+    event.preventDefault();
+    showNodes(nodeArray, 255);
+    var temp = document.getElementById('start-end');
+    temp.style.display = "none";
+    var tempStart = document.getElementById('start');
+    var tempEnd = document.getElementById('end');
     openSet = [];
     closedSet = [];
     path = [];
-    start = nodeArray[0];
-    end = nodeArray[nodeArray.length - 1];
+    for(var i = 0; i < nodeArray.length; i++){
+        if(nodeArray[i].nodeName == tempStart.value.toUpperCase()){
+            start = nodeArray[i];
+        }
+        if(nodeArray[i].nodeName == tempEnd.value.toUpperCase()){
+            end = nodeArray[i];
+        }
+    }
     var done = false;
     openSet.push(start);
     const interval = setInterval(() => {
