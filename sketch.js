@@ -11,8 +11,11 @@ var button;
 var openSet = [];
 var closedSet = [];
 var path = [];
+var result, dispPath;
 
 function setup(){
+    dispPath = document.getElementById('path');
+    result = document.getElementById('result');
     var temp = document.getElementById('start-end');
     temp.style.display = "none";
     createCanvas(900, 557);
@@ -44,7 +47,8 @@ function draw(){
     button.mousePressed(startEndInput);
 }
 
-var statChar = 'A'
+var statChar = 'A';
+var extra = '';
 function mouseClicked(){ // mouse release
     ok = false; // line animation stops
     if(edgeOk){ // making a new edge in progress
@@ -77,7 +81,16 @@ function mousePressed(){ // mouse clicked
         edgeOk = null;
         // auto adjusting node's x,y towards closest grid intersection
         var coordinates = closestIntersection(mouseX, mouseY);
-        createNode(statChar, coordinates[0], coordinates[1]);
+        if(statChar == '['){
+            statChar = 'A';
+            if(!extra){
+                extra = 'A';
+            }
+            else{
+                extra = String.fromCharCode(extra.charCodeAt(0) + 1);
+            }
+        }
+        createNode(extra+statChar, coordinates[0], coordinates[1]);
         statChar = String.fromCharCode(statChar.charCodeAt(0) + 1);
     }
     else{

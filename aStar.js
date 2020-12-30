@@ -1,7 +1,10 @@
 var aStar = function(event){
+    result.innerHTML  = '';
+    dispPath.innerHTML = '';
     event.preventDefault();
     showNodes(nodeArray, 255);
     resetValues();
+    var stringPath = '';
     var temp = document.getElementById('start-end');
     temp.style.display = "none";
     var tempStart = document.getElementById('start');
@@ -36,6 +39,12 @@ var aStar = function(event){
             var current = openSet[winner];
             if (current === end) {
                 done = true;
+                for(var i = path.length - 1; i >= 0; i--){
+                    stringPath += path[i].nodeName + ' ';
+                }
+                stringPath += end.nodeName;
+                dispPath.innerHTML = stringPath;
+                result.innerHTML = 'Done';
                 clearInterval(interval);
             }
             removeFromArray(openSet, current);
@@ -73,6 +82,7 @@ var aStar = function(event){
         } else {
             done = true;
             console.log("No Solution");
+            result.innerHTML = 'No Solution';
             clearInterval(interval);
             return;
         }
