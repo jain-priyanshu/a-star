@@ -30,12 +30,7 @@ var aStar = function(event){
     openSet.push(start);
     const interval = setInterval(() => {
         if (openSet.length > 0) {
-            var winner = 0;
-            for (var i = 0; i < openSet.length; i++) {
-                if (openSet[i].f < openSet[winner].f) {
-                    winner = i;
-                }
-            }
+            var winner = minArray(openSet);
             var current = openSet[winner];
             if (current === end) {
                 done = true;

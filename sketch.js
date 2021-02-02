@@ -12,6 +12,7 @@ var openSet = [];
 var closedSet = [];
 var path = [];
 var result, dispPath;
+var dijkstraButton;
 
 function setup(){
     dispPath = document.getElementById('path');
@@ -20,6 +21,7 @@ function setup(){
     temp.style.display = "none";
     createCanvas(900, 557);
     button = createButton('A*');
+    dijkstraButton = createButton('Dijkstra');
 }
 
 function draw(){
@@ -45,6 +47,7 @@ function draw(){
         }
     }
     button.mousePressed(startEndInput);
+    dijkstraButton.mousePressed(dijkstra);
 }
 
 var statChar = 'A';

@@ -153,3 +153,13 @@ function resetValues(){
         nodeArray[i].previous = undefined;
     }
 }
+
+function minArray(arr){
+    let winner = 0;
+    for (let i = 0; i < openSet.length; i++) {
+        if (openSet[i].f < openSet[winner].f) {
+            winner = i;
+        }
+    }
+    return winner;
+}
