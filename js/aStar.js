@@ -5,8 +5,8 @@ var aStar = function(event){
     showNodes(nodeArray, 255);
     resetValues();
     var stringPath = '';
-    var temp = document.getElementById('start-end');
-    temp.style.display = "none";
+    var startEndForm = document.getElementById('start-end');
+    startEndForm.style.display = "none";
     var tempStart = document.getElementById('start');
     var tempEnd = document.getElementById('end');
     openSet = [];
@@ -23,7 +23,7 @@ var aStar = function(event){
         }
     }
     if(!start || !end){
-        startEndInput();
+        aStarInput();
         return;
     }
     var done = false;
@@ -34,11 +34,6 @@ var aStar = function(event){
             var current = openSet[winner];
             if (current === end) {
                 done = true;
-                for(var i = path.length - 1; i >= 0; i--){
-                    stringPath += path[i].nodeName + ' ';
-                }
-                stringPath += end.nodeName;
-                dispPath.innerHTML = stringPath;
                 result.innerHTML = 'Done';
                 clearInterval(interval);
             }
@@ -85,10 +80,14 @@ var aStar = function(event){
         var temp = current;
         path.push(temp);
         while (temp.previous) {
-            console.log("Hey");
             path.push(temp.previous);
             temp = temp.previous;
         }
+        stringPath = '';
+        for(var i = path.length - 1; i >= 0; i--){
+            stringPath += path[i].nodeName + ' ';
+        }
+        dispPath.innerHTML = stringPath;
         showNodes(openSet, [0, 255, 0]);
         showNodes(closedSet, [255, 0, 0]);
         showNodes(path, [0, 0, 255]);

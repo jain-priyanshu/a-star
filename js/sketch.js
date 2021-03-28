@@ -46,8 +46,8 @@ function draw(){
             }
         }
     }
-    button.mousePressed(startEndInput);
-    dijkstraButton.mousePressed(dijkstra);
+    button.mousePressed(aStarInput);
+    dijkstraButton.mousePressed(dijkstraInput);
 }
 
 var statChar = 'A';

@@ -139,10 +139,16 @@ function gInput(edge){
     }
 }
 
-function startEndInput(){
+function aStarInput(){
     var temp = document.getElementById('start-end');
     temp.style.display = "block";
     temp.addEventListener('submit', aStar);
+}
+
+function dijkstraInput(){
+    var temp = document.getElementById('start-end');
+    temp.style.display = "block";
+    temp.addEventListener('submit', dijkstra);
 }
 
 function resetValues(){

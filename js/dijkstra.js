@@ -1,16 +1,34 @@
 var dijkstra = function(event){
+    event.preventDefault();
+    var startEndForm = document.getElementById('start-end');
+    startEndForm.style.display = "none";
+    var tempStart = document.getElementById('start');
+    var tempEnd = document.getElementById('end');
+    for(var i = 0; i < nodeArray.length; i++){
+        if(nodeArray[i].nodeName == tempStart.value.toUpperCase()){
+            start = nodeArray[i];
+        }
+        if(nodeArray[i].nodeName == tempEnd.value.toUpperCase()){
+            end = nodeArray[i];
+        }
+    }
+    if(!start || !end){
+        dijkstraInput();
+        return;
+    }
     openSet = [];
     closedSet = [];
     path = [];
     nodeArray.forEach(element => {
-        openSet.push(element);
+        if(element != start){
+            openSet.push(element);
+        }
         element.g = Infinity;
         element.previous = undefined;
 
     });
-    nodeArray[0].g = 0;
-    let current = openSet[0];
-    openSet.splice(0, 1);
+    start.g = 0;
+    let current = start;
     closedSet.push(current);
     const interval = setInterval(() => {
         if(openSet.length >  0){
@@ -37,7 +55,7 @@ var dijkstra = function(event){
             clearInterval(interval);
         }
         path = [];
-        var temp = current;
+        var temp = end;
         path.push(temp);
         while (temp.previous) {
             console.log("Hey");
